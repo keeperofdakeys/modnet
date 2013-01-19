@@ -7,5 +7,5 @@ setup(name='modnet',
     author='keeperofdakeys',
     author_email='keeperofdakeys@gmail.com',
     license='MIT',
-    packages=['modnet'],
+    packages=['modnet', 'modnet_daemon'],
     zip_safe=False)
