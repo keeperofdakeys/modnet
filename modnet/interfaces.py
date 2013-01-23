@@ -4,19 +4,41 @@ class Interface:
     self.active = False
     self.local = False
     self.static = False
-    self.mode = 0
     self.ip = 0
     self.subnet = 0
 
-  def apply_connection(self, connection):
-    if self.mode == 1:
-      connection.apply_wireless_connection(connection)
+  def add_connection(self, connection):
+    pass
+
+  def remove_connection(self, connection):
+    pass
+
+  def select_connection(self, connection):
+    pass
 
 class WirelessInterface:
   def __init__(self, interface, mode, wpa_supplicant):
     Interface.__init__(self, interface)
-    self.mode = 1
     self.wpa_supplicant = wpa_supplicant
+    self.wpa_supplicant.add_interface(self.interface)
 
-  def apply_wireless_connection(self, wirless_connection):
-    # configure wpa_supplicant to connect to this, via some means
+  def add_connection(self, connection):
+    self.wpa_supplicant.add_connection(self.interface, connection)
+    Interface.add_connection(self, connection)
+
+  def remove_connection(self, connection):
+    self.wpa_supplicant.remove_connection(self.interface, connection)
+    Interface.remove_connection(self, connection)
+
+  def select_connection(self, connection):
+    self.wpa_supplicant.select_connection(self.interface, connection)
+    Interface.select_connection(self, connection)
+
+  def disconnect(self):
+    self.wpa_supplicant.disconnect(self.interface)
+
+  def scan(self):
+    self.wpa_supplicant.scan(self.interface)
+
+  def get_status(self):
+    self.wpa_supplicant.get_status(self.interface)

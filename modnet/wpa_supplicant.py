@@ -1,23 +1,28 @@
-from connections import WirelessConnection
-
 class WpaSupplicant():
   def __init__(self):
+    # store information needed to communicate to wpa_supplicant
     pass
 
-  def get_status(self):
+  def add_interface(self, interface):
     pass
 
-  def connect(self, WirelessConnection):
+  def remove_interface(self, interface):
     pass
 
-  def disconnect(self):
+  def get_status(self, interface):
     pass
 
-  def reassociate(self):
+  def add_network(self, interface, wireless_connection):
     pass
 
-  def scan(self):
+  def remove_network(self, interface, wireless_connection):
     pass
 
-  def roma(self):
+  def select_network(self, interface, wireless_connection):
+    pass
+
+  def disconnect(self, interface):
+    pass
+
+  def scan(self, interface):
     pass
