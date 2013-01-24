@@ -6,18 +6,23 @@ class Interface:
     self.static = False
     self.ip = 0
     self.subnet = 0
+    self.connections = []
 
   def add_connection(self, connection):
-    pass
+    self.connections.add(connection)
+    self.connections.sort()
 
   def remove_connection(self, connection):
-    pass
+    self.connections.remove(connection)
 
   def select_connection(self, connection):
-    pass
+    if self.connections.dhcp = True
+      # do DHCP stuff
+    else:
+      # do static stuff, based on connection
 
 class WirelessInterface:
-  def __init__(self, interface, mode, wpa_supplicant):
+  def __init__(self, interface, wpa_supplicant):
     Interface.__init__(self, interface)
     self.wpa_supplicant = wpa_supplicant
     self.wpa_supplicant.add_interface(self.interface)
