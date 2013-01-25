@@ -1,7 +1,34 @@
 class Connection:
-  def __init__(self, name, priority):
+  def __init__(self, name, priority, local=False):
     self.name = name
     self.priority = priority
+    self.active = False
+    self.dhcp = True
+    self.local = local
+    self.static_ip = None
+    self.static_subnet = None
+
+  def setup_static_ip(self, ip, subnet):
+    self.dhcp = False
+    self.static_ip = ip
+    self.static_subnet = subnet
+    if self.active:
+      self.active_interface.reinitialise()
+  
+  def setup_dhcp(self):
+    self.dhcp = True
+    self.static_ip = None
+    self.static_subnet = None
+    if self.active:
+      self.active_interface.reinitialise()
+
+  def activate(self):
+    self.active = True
+    # STUB: do other required stuff
+
+  def deactivate(self):
+    self.active = False
+    # STUB: do other required stuff
 
   def _key(self):
     return (self.name, self.priority)
