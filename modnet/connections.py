@@ -7,6 +7,7 @@ class Connection:
     self.local = local
     self.static_ip = None
     self.static_subnet = None
+    self.active_interface = None
 
   def setup_static_ip(self, ip, subnet):
     self.dhcp = False
@@ -22,12 +23,14 @@ class Connection:
     if self.active:
       self.active_interface.reinitialise()
 
-  def activate(self):
+  def activate(self, interface):
     self.active = True
+    self.active_interface = interface
     # STUB: do other required stuff
 
-  def deactivate(self):
+  def deactivate(self, interface):
     self.active = False
+    self.active_interface = None
     # STUB: do other required stuff
 
   def _key(self):
