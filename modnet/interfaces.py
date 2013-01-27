@@ -9,6 +9,7 @@ class Interface:
     self.subnet = 0
     self.connections = []
     self.active_connection = None
+    self.routes = set()
 
   def add_connection(self, connection):
     self.connections.add(connection)
@@ -35,19 +36,25 @@ class Interface:
     if self.active_connection == None:
       return
     if self.dhcp:
-      self.dhcp_service.request_lease(interface, self.active_connection.lease)
+      self.dhcp_lease = self.dhcp_service.request_lease(self.interface_name, self.local)
+      if self.dhcp_lease["status"] == "Completed":
+        self.ip = self.dhcp_lease["ip"]
+        self.subnet = self.dhcp_lease["subnet"]
     else:
-      self.ip_service.change_ip(self.interface_name, self.active_connection.static_ip)
-      self.ip_service.change_subnet(self.interface_name, self.active_connection.static_subnet)
-      if self.local:
-       self.ip_serice.add_route("0.0.0.0", "", self.interface_name, self.gateway)
+      self.ip = self.active_connection.static_ip
+      self.ip_service.change_ip(self.interface_name, self.ip)
+      self.subnet = self.active_connection.static_subnet
+      self.ip_service.change_subnet(self.interface_name, self.subnet)
+      if not self.local:
+       self.routes.append(self.ip_serice.add_route("0.0.0.0", "", self.interface_name, self.gateway))
 
 
   def deinitialise(self):
     if self.active_connection == None:
       return
     if self.dhcp:
-      # STUB: stop DHCP
+      self.dhcp_service.release(self.interface_name)
+      self.dhcp_lease = None
     else:
       # STUB: undo static stuff
 
