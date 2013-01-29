@@ -18,34 +18,34 @@ class Dbus_handler:
   def bss_added_add_receiver(self, receiver):
     self.receivers['bss_added'].add(receiver)
 
-  def bss_added(self, success):
+  def bss_added(self, bss, properties):
     for x in self.receivers:
-      receiver(success)
+      receiver(bss, properties)
 
   def bss_removed_add_receiver(self, receiver):
     self.receivers['bss_removed'].add(receiver)
 
-  def bss_removed(self, success):
+  def bss_removed(self, bss):
     for x in self.receivers:
-      receiver(success)
+      receiver(bss)
 
   def network_added_add_receiver(self, receiver):
     self.receivers['network_added'].add(receiver)
 
-  def network_added(self, success):
+  def network_added(self, network, properties):
     for x in self.receivers:
-      receiver(success)
+      receiver(network, properties)
 
   def network_removed_add_receiver(self, receiver):
     self.receivers['network_removed'].add(receiver)
 
-  def network_removed(self, success):
+  def network_removed(self, network):
     for x in self.receivers:
-      receiver(success)
+      receiver(network)
 
   def properties_changed_add_receiver(self, receiver):
     self.receivers['properties_changed'].add(receiver)
 
-  def properties_changed(self, success):
+  def properties_changed(self, properties):
     for x in self.receivers:
-      receiver(success)
+      receiver(properties)
