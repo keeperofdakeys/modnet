@@ -1,0 +1,3 @@
+~/.config/modnet/ is the configuration directory
+general.conf, interfaces.conf, connections.conf and wireless_connections.conf will be configuration files
+
