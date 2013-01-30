@@ -66,8 +66,8 @@ class Connection:
     return self.name.__cmp__(other)
 
 class WirelessConnection(Connection):
-  def __init__(self, name, priority, enc_mode, ssid, psk=None):
-    Connection.__init__(self, name, priority)
+  def __init__(self, name, priority, enc_mode, ssid, psk=None, local=None):
+    Connection.__init__(self, name, priority, local)
     self.enc_mode = enc_mode
     self.ssid = ssid
 
