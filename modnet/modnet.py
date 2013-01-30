@@ -49,4 +49,6 @@ def main():
       for y in connections:
         x.add_connection(y)
 
+  dbus_receiver = Dbus_handler()
 
+  # dbus_receiver.network_selected_add_receiver(

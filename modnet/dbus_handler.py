@@ -6,6 +6,7 @@ class Dbus_handler:
     self.receivers['bss_removed'] = set()
     self.receivers['network_added'] = set()
     self.receivers['network_removed'] = set()
+    self.receivers['network_selectedd'] = set()
     self.receivers['properties_changed'] = set()
 
   def scan_done_add_receiver(self, receiver):
@@ -40,6 +41,13 @@ class Dbus_handler:
     self.receivers['network_removed'].add(receiver)
 
   def network_removed(self, network):
+    for x in self.receivers:
+      receiver(network)
+
+  def network_selectedd_add_receiver(self, receiver):
+    self.receivers['network_selectedd'].add(receiver)
+
+  def network_selectedd(self, network):
     for x in self.receivers:
       receiver(network)
 
