@@ -30,4 +30,3 @@ class WpaSupplicant():
   def restart(self):
     stop(self)
     start(self)
-    pass
