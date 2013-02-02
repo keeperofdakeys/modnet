@@ -1,6 +1,9 @@
+import dbus
+
 class ModnetDaemon:
   def __init__(self):
-    pass
+    self.bus = dbus.SystemBus()
+    self.proxy = bus.get_object(
 
   def start_wpa_supplicant(self):
     pass
